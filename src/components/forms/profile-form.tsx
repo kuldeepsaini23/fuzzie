@@ -22,7 +22,7 @@ type Props = {
   onUpdate?: any
 }
 
-const ProfileForm = ({  }: Props) => {
+const ProfileForm = ({ user, onUpdate }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof EditUserProfileSchema>>({
     mode: 'onChange',
@@ -33,18 +33,18 @@ const ProfileForm = ({  }: Props) => {
     },
   })
 
-  // const handleSubmit = async (
-  //   values: z.infer<typeof EditUserProfileSchema>
-  // ) => {
-  //   setIsLoading(true)
-  //   await onUpdate(values.name)
-  //   setIsLoading(false)
-  // }
+  const handleSubmit = async (
+    values: z.infer<typeof EditUserProfileSchema>
+  ) => {
+    setIsLoading(true)
+    await onUpdate(values.name)
+    setIsLoading(false)
+  }
 
-  // useEffect(() => {
-  //   form.reset({ name: user.name, email: user.email })
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user])
+  useEffect(() => {
+    form.reset({ name: user.name, email: user.email })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   return (
     <Form {...form}>
