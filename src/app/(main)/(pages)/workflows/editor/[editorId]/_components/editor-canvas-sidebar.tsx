@@ -14,8 +14,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import {
-  // fetchBotSlackChannels,
-  // onConnections,
+  fetchBotSlackChannels,
+  onConnections,
   onDragStart,
 } from '@/lib/editor-utils'
 import EditorCanvasIconHelper from './editor-canvas-card-icon-hepler'
@@ -28,7 +28,6 @@ import {
 import RenderConnectionAccordion from './render-connection-accordion'
 import RenderOutputAccordion from './render-output-accordian'
 import { useFuzzieStore } from '@/store'
-// import { useFuzzieStore } from '@/store'
 
 type Props = {
   nodes: EditorNodeType[]
@@ -38,26 +37,26 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
   const { state } = useEditor()
   const { nodeConnection } = useNodeConnections()
   const { googleFile, setSlackChannels } = useFuzzieStore();
-  // useEffect(() => {
-  //   // if (state) {
-  //   //   onConnections(nodeConnection, state, googleFile)
-  //   // }
-  // }, [state])
+  useEffect(() => {
+    if (state) {
+      onConnections(nodeConnection, state, googleFile)
+    }
+  }, [state])
 
-  // useEffect(() => {
-  //   if (nodeConnection.slackNode.slackAccessToken) {
-  //     fetchBotSlackChannels(
-  //       nodeConnection.slackNode.slackAccessToken,
-  //       setSlackChannels
-  //     )
-  //   }
-  // }, [nodeConnection])
+  useEffect(() => {
+    if (nodeConnection.slackNode.slackAccessToken) {
+      fetchBotSlackChannels(
+        nodeConnection.slackNode.slackAccessToken,
+        setSlackChannels
+      )
+    }
+  }, [nodeConnection])
 
   return (
     <aside>
       <Tabs
         defaultValue="actions"
-        className="h-screen overflow-scroll pb-24"
+        className="h-screen overflow-scroll pb-48"
       >
         <TabsList className="bg-transparent">
           <TabsTrigger value="actions">Actions</TabsTrigger>

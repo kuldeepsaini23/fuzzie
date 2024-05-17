@@ -10,7 +10,7 @@ const isPublicRoutes= createRouteMatcher( [
 const isProtectedRoutes= createRouteMatcher( [
   '/dashboard(.*)',
  '/settings',
- '/workflows',
+ '/workflows(.*)',
  '/connections',
  '/billing',
  '/templates',

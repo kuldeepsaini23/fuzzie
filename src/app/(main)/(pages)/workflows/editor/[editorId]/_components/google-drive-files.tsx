@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-// import { getGoogleListener } from '../../../_actions/workflow-connections'
+import { getGoogleListener } from '../../../_actions/workflow-connections'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription } from '@/components/ui/card'
 import { CardContainer } from '@/components/global/3d-card'
@@ -26,10 +26,10 @@ const GoogleDriveFiles = (props: Props) => {
   }
 
   const onListener = async () => {
-    // const listener = await getGoogleListener()
-    // if (listener?.googleResourceId !== null) {
-    //   setIsListening(true)
-    // }
+    const listener = await getGoogleListener()
+    if (listener?.googleResourceId !== null) {
+      setIsListening(true)
+    }
   }
 
   useEffect(() => {

@@ -22,9 +22,9 @@ import {
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { Loader2 } from 'lucide-react'
-// import { toast } from 'sonner'
-// import { onCreateWorkflow } from '@/app/(main)/(pages)/workflows/_actions/workflow-connections'
 import { useModal } from '@/providers/modal-provider'
+import { onCreateWorkflow } from '@/app/(main)/(pages)/workflows/_actions/workflow-connections'
+import { useToast } from '../ui/use-toast'
 
 type Props = {
   title?: string
@@ -33,10 +33,11 @@ type Props = {
 
 const Workflowform = ({ subTitle, title }: Props) => {
   const { setClose } = useModal()
+  const { toast} = useToast();
   const form = useForm<z.infer<typeof WorkflowFormSchema>>({
     mode: 'onChange',
     resolver: zodResolver(WorkflowFormSchema),
-    defaultValues: {
+    defaultValues: { 
       name: '',
       description: '',
     },
@@ -46,12 +47,12 @@ const Workflowform = ({ subTitle, title }: Props) => {
   const router = useRouter()
 
   const handleSubmit = async (values: z.infer<typeof WorkflowFormSchema>) => {
-    // const workflow = await onCreateWorkflow(values.name, values.description)
-    // if (workflow) {
-    //   toast.message(workflow.message)
-    //   router.refresh()
-    // }
-    // setClose()
+    const workflow = await onCreateWorkflow(values.name, values.description)
+    if (workflow) {
+      toast({title:workflow.message});
+      router.refresh()
+    }
+    setClose()
   }
 
   return (

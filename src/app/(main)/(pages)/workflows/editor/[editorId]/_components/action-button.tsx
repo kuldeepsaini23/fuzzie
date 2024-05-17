@@ -29,7 +29,7 @@ const ActionButton = ({
   const onSendDiscordMessage = useCallback(async () => {
     const response = await postContentToWebHook(
       nodeConnection.discordNode.content,
-      nodeConnection.discordNode.webhookURL
+      nodeConnection.discordNode.webhookURL 
     )
 
     if (response.message == 'success') {
@@ -118,6 +118,7 @@ const ActionButton = ({
         toast({title:response})
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeConnection, channels])
 
   const renderActionButton = () => {

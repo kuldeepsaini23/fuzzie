@@ -10,8 +10,8 @@ const nextConfig = {
         protocol:'https',
         hostname:'ucarecdn.com'
       }
-    ]
+    ] 
   }
-};
+}; 
 
 export default nextConfig;

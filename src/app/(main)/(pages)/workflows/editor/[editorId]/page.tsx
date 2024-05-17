@@ -6,7 +6,7 @@ import EditorCanvas from './_components/editor-canvas'
 type Props = {}
 
 const Page = (props: Props) => {
-  return (
+  return ( 
     <div className='w-full h-full'>
       <EditorProvider>
         <ConnectionsProvider>

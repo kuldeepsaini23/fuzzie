@@ -1,9 +1,17 @@
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+'use client';
+import React from 'react'
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import Link from 'next/link'
+import Image from 'next/image'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { onFlowPublish } from '../_actions/workflow-connections'
+import { useToast } from '@/components/ui/use-toast'
 
 type Props = {
   name: string
@@ -12,21 +20,22 @@ type Props = {
   publish: boolean | null
 }
 
-const Workflow = ({
-  description,id,name,publish
-}: Props) => {
+const Workflow = ({ description, id, name, publish }: Props) => {
+  const {toast} = useToast();
+  const onPublishFlow = async (event: any) => {
+    console.log(event.target.ariaChecked)
+    const response = await onFlowPublish(
+      id,
+      event.target.ariaChecked === 'false'
+    )
+    if (response) toast({title:response})
+  }
+
   return (
     <Card className="flex w-full items-center justify-between">
       <CardHeader className="flex flex-col gap-4">
         <Link href={`/workflows/editor/${id}`}>
           <div className="flex flex-row gap-2">
-          <Image
-              src="/slack.png"
-              alt="Google Drive"
-              height={30}
-              width={30}
-              className="object-contain"
-            />
             <Image
               src="/googleDrive.png"
               alt="Google Drive"
@@ -48,7 +57,6 @@ const Workflow = ({
               width={30}
               className="object-contain"
             />
-            
           </div>
           <div className="">
             <CardTitle className="text-lg">{name}</CardTitle>
@@ -65,7 +73,7 @@ const Workflow = ({
         </Label>
         <Switch
           id="airplane-mode"
-          // onClick={onPublishFlow}
+          onClick={onPublishFlow}
           defaultChecked={publish!}
         />
       </div>
