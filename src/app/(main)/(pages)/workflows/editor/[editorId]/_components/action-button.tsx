@@ -38,6 +38,7 @@ const ActionButton = ({
         content: '',
       }))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeConnection.discordNode])
 
   const onStoreNotionContent = useCallback(async () => {
@@ -57,6 +58,7 @@ const ActionButton = ({
         content: '',
       }))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeConnection.notionNode])
 
   const onStoreSlackContent = useCallback(async () => {

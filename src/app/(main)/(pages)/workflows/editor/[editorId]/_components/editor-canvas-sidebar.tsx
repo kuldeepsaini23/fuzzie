@@ -41,6 +41,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
     if (state) {
       onConnections(nodeConnection, state, googleFile)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state])
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
         setSlackChannels
       )
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodeConnection])
 
   return (
