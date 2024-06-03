@@ -1,4 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { redirect } from "next/dist/server/api-utils";
+import { NextResponse } from "next/server";
 
 const isPublicRoutes= createRouteMatcher( [
    '/dashboard(.*)',
@@ -26,11 +28,12 @@ const isIgnoredRoutes= createRouteMatcher( [
   '/api/cron/wait',
 ])
 export default clerkMiddleware((auth, req) => {
-  if (!auth().userId && isProtectedRoutes(req)) {
 
+  if (!auth().userId && isProtectedRoutes(req)) {
+    
     // Add custom logic to run before redirecting
 
-    return auth().redirectToSignIn();
+    auth().protect();
   }
 
   if (isIgnoredRoutes(req)) return;
