@@ -67,7 +67,7 @@ const Workflowform = ({ subTitle, title }: Props) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="flex flex-col gap-4 text-left"
+            className="flex flex-col gap-4 text-left bg-transparent"
           >
             <FormField
               disabled={isLoading}
